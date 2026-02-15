@@ -15,7 +15,7 @@ const GameConfig = {
 // Game State Module
 const GameState = {
     score: 0,
-    timeLeft: 30,
+    timeLeft: GameConfig.GAME_DURATION / 1000,
     isPlaying: false,
     highScore: 0,
     activeTimeouts: [],
@@ -26,7 +26,7 @@ const GameState = {
     
     reset() {
         this.score = 0;
-        this.timeLeft = 30;
+        this.timeLeft = GameConfig.GAME_DURATION / 1000;
         this.isPlaying = false;
         this.clearAllTimeouts();
     },
@@ -255,7 +255,7 @@ const Game = {
         
         Timer.start();
         MoleController.scheduleNextMole();
-        MoleController.scheduleNextMole(); // Start with two moles active
+        MoleController.scheduleNextMole(); // Schedule second concurrent mole spawn sequence
     },
     
     end() {
