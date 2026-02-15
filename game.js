@@ -9,7 +9,8 @@ const GameConfig = {
     MIN_MOLE_TIME: 500,   // Minimum time mole stays up (ms)
     MAX_MOLE_TIME: 1500,  // Maximum time mole stays up (ms)
     MIN_SPAWN_DELAY: 400, // Minimum delay between spawns (ms)
-    MAX_SPAWN_DELAY: 1000 // Maximum delay between spawns (ms)
+    MAX_SPAWN_DELAY: 1000, // Maximum delay between spawns (ms)
+    WHACKED_DISPLAY_TIME: 200 // Time to show whacked mole before hiding (ms)
 };
 
 // Game State Module
@@ -207,7 +208,7 @@ const InputHandler = {
             // Hide mole after brief delay
             setTimeout(() => {
                 mole.classList.remove('up', 'whacked');
-            }, 200);
+            }, GameConfig.WHACKED_DISPLAY_TIME);
         }
     }
 };
@@ -255,7 +256,8 @@ const Game = {
         
         Timer.start();
         MoleController.scheduleNextMole();
-        MoleController.scheduleNextMole(); // Schedule second concurrent mole spawn sequence
+        // Schedule second concurrent sequence to increase difficulty with multiple active moles
+        MoleController.scheduleNextMole();
     },
     
     end() {
